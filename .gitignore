@@ -26,3 +26,8 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+*.sln
+*.csproj
+*.userprefs
+Library
+build
