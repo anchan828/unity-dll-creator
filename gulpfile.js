@@ -101,14 +101,15 @@ function appendDefine(unityversion) {
 
     defines = []
 
-    if (config.defines.hasOwnProperty(unityversion)) {
-        defines = defines.concat(config.defines[unityversion])
-    }
+    if (config.hasOwnProperty('defines')) {
+        if (config.defines.hasOwnProperty(unityversion)) {
+            defines = defines.concat(config.defines[unityversion])
+        }
 
-    if (config.defines.hasOwnProperty('all')) {
-        defines = defines.concat(config.defines['all'])
+        if (config.defines.hasOwnProperty('all')) {
+            defines = defines.concat(config.defines['all'])
+        }
     }
-
     getTempFiles(unityversion).forEach(function (file) {
         data = fs.readFileSync(file, {encoding: 'utf8'});
 
