@@ -1,3 +1,7 @@
+
+Unity側でコンパイルされるとgulpが検知してModuleManager用のDLLを生成してくれる的な。
+
+
 ## Step 1
 
 [gulp.js](http://gulpjs.com/)をインストール
