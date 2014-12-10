@@ -25,7 +25,18 @@ module-config.jsonを編集
   "unityversions": [
     "4.6",
     "5.0"
-  ]
+  ],
+  "defines": {
+    "4.6": [
+      "UNITY_4_6"
+    ],
+    "5.0": [
+      "UNITY_5_0"
+    ],
+    "all": [
+      "DEBUG"
+    ]
+  }
 }
 ```
 
@@ -36,6 +47,7 @@ organisation|組織名
 module|モジュール名
 packageType| UnityExtension固定
 unityversions| 使用できるUnityパージョン
+defines|定義。バージョン毎と、すべてのバージョンでの定義ができる
 
 ## Step 4
 
