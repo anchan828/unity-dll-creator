@@ -157,10 +157,9 @@ gulp.task('compile', function () {
 
         }
 
-        ivy = ivy.replace("#ARTIFACTS#", artifacts.join('\n'))
-
-        fs.outputFile(path + "ivy.xml", ivy)
-
+        ivy = ivy.replace("#ARTIFACTS#", artifacts.join('\n') + '\n')
+        ivy_path = path + "ivy.xml"
+        fs.exists(ivy_path) ? fs.writeFileSync(ivy_path, ivy) : fs.outputFileSync(ivy_path, ivy)
     })
 });
 
