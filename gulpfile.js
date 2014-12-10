@@ -53,6 +53,14 @@ function removeDefine(unityversion) {
     })
 }
 
+
+function removeModuleReference(unityversion) {
+    getTempFiles(unityversion).forEach(function (file) {
+        var data = fs.readFileSync(file, {encoding: 'utf8'}).replace(/^-r:'.*[Data\\|Contents\/]UnityExtensions\/[^Unity\/].*'$[\s\S]/mg, "")
+        fs.writeFileSync(file, data)
+    })
+}
+
 function replaceOut(unityversion, path) {
 
     getTempFiles(unityversion).forEach(function (file) {
@@ -119,6 +127,7 @@ gulp.task('compile', function () {
         path = 'build/' + config.organisation + '/' + config.module + '/' + unityversion + '/'
 
         removeDefine(unityversion)
+        removeModuleReference(unityversion)
         replaceOut(unityversion, path)
 
         appendDefine(unityversion)
