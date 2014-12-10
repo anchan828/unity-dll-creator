@@ -134,7 +134,7 @@ gulp.task('compile', function () {
         appendDefine(unityversion)
 
         getTempFiles(unityversion).forEach(function (file) {
-            exec("mcs " + jointLine(file))
+            exec("mcs -sdk:2 " + jointLine(file))
             fs.unlink(file)
         })
 
