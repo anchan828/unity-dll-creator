@@ -14,7 +14,18 @@ var config = {
     organisation: "Organisation",
     module: "MyFirstModule",
     packageType: "UnityExtension",
-    unityversions: ["4.6", "5.0"]
+    unityversions: ["4.6", "5.0"],
+    defines: {
+        "4.6": [
+            "UNITY_4_6"
+        ],
+        "5.0": [
+            "UNITY_5_0"
+        ],
+        "all": [
+            "DEBUG"
+        ]
+    }
 }
 
 fs.readJson('./module-config.json', function (err, json) {
@@ -78,6 +89,29 @@ function replaceOut(unityversion, path) {
     })
 }
 
+function appendDefine(unityversion) {
+
+    defines = []
+
+    if (config.defines.hasOwnProperty(unityversion)) {
+        defines = defines.concat(config.defines[unityversion])
+    }
+
+    if (config.defines.hasOwnProperty('all')) {
+        defines = defines.concat(config.defines['all'])
+    }
+
+    getTempFiles(unityversion).forEach(function (file) {
+        data = fs.readFileSync(file, {encoding: 'utf8'});
+
+
+        defines.forEach(function (define) {
+            data += '-define:' + define + '\n'
+        })
+        fs.writeFileSync(file, data)
+    })
+}
+
 gulp.task('compile', function () {
     config.unityversions.forEach(function (unityversion) {
 
@@ -86,6 +120,8 @@ gulp.task('compile', function () {
 
         removeDefine(unityversion)
         replaceOut(unityversion, path)
+
+        appendDefine(unityversion)
 
         getTempFiles(unityversion).forEach(function (file) {
             exec("mcs " + jointLine(file))

@@ -6,5 +6,16 @@
   "unityversions": [
     "4.6",
     "5.0"
-  ]
+  ],
+  "defines": {
+    "4.6": [
+      "UNITY_4_6"
+    ],
+    "5.0": [
+      "UNITY_5_0"
+    ],
+    "all": [
+      "DEBUG"
+    ]
+  }
 }
