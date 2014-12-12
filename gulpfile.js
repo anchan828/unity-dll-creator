@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
     fs = require('fs-extra'),
     glob = require('glob'),
-    exec = require('child_process').exec,
+    exec = require('execsyncs'),
     uuid = require('node-uuid')
 
 var watcher = gulp.watch('Temp/UnityTempFile-*', ['compile'])
@@ -34,9 +34,9 @@ fs.readJson('./module-config.json', function (err, json) {
 })
 
 gulp.task('default', function () {
-    if (fs.exists('build/')) {
-        fs.unlink('build/')
-    }
+    
+    exec('rm -rf build/')
+
     watcher.on('change', function (event) {
         if (event.type == "added")
             config.unityversions.forEach(function (unityversion) {
